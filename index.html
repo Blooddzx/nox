@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoxClient</title>
+    <title>NoxClient — лаунчер с визуалами</title>
     <style>
         * {
             margin: 0;
@@ -11,21 +11,22 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #0B0B1A;
             color: #FFFFFF;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
-            overflow: hidden;
+            padding: 0;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Анимированные частицы на фоне */
+        /* Анимированные частицы */
         .particles {
             position: fixed;
             top: 0;
@@ -58,7 +59,6 @@
             }
         }
 
-        /* Лёгкое свечение в центре */
         .glow {
             position: fixed;
             top: 50%;
@@ -71,29 +71,78 @@
             z-index: 0;
         }
 
-        .container {
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
+        /* Шапка */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        h1 {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo .nox {
+            color: #8B5CF6;
+        }
+
+        .logo .client {
+            color: #FFFFFF;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #A78BFA;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #FFFFFF;
+        }
+
+        /* Основной контент */
+        main {
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        /* Главная секция */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 40px;
-            user-select: none;
             text-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
             animation: fadeInDown 1s ease-out;
         }
 
-        .nox {
+        .hero h1 .nox {
             color: #8B5CF6;
         }
 
-        .client {
+        .hero h1 .client {
             color: #FFFFFF;
         }
 
@@ -167,6 +216,112 @@
             transform: translateY(-3px);
         }
 
+        /* Секции */
+        section h2 {
+            font-size: 2.2rem;
+            color: #8B5CF6;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .features {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            border: 2px solid #6D28D9;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            background: rgba(139, 92, 246, 0.03);
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #FFFFFF;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #A78BFA;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .about {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about p {
+            color: #A78BFA;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .contacts {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .telegram-btn {
+            display: inline-block;
+            border: 2px solid #8B5CF6;
+            border-radius: 10px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #FFFFFF;
+            text-decoration: none;
+            background: rgba(139, 92, 246, 0.1);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .telegram-btn:hover {
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #6D28D9;
+            margin-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            color: #A78BFA;
+            font-size: 0.9rem;
+        }
+
         /* Анимации появления */
         @keyframes fadeInDown {
             from {
@@ -191,55 +346,160 @@
         }
 
         /* Адаптивность */
-        @media (max-width: 600px) {
-            h1 {
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
             .big-button {
                 padding: 30px 25px;
-                margin-bottom: 30px;
             }
 
             .big-button p {
                 font-size: 1rem;
             }
 
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 25px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .small-buttons {
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
             .small-button {
-                padding: 10px 25px;
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+
+            .telegram-btn {
+                padding: 12px 30px;
                 font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Фон с частицами -->
+    <!-- Фон -->
     <div class="particles" id="particles"></div>
     <div class="glow"></div>
 
-    <div class="container">
-        <h1>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">
             <span class="nox">NOX</span><span class="client">CLIENT</span>
-        </h1>
+        </div>
+        <nav>
+            <a href="#hero">Главная</a>
+            <a href="#features">Функции</a>
+            <a href="#about">О проекте</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
 
-        <div class="big-button">
+    <main>
+        <!-- Главная секция -->
+        <section id="hero" class="hero">
+            <h1>
+                <span class="nox">NOX</span><span class="client">CLIENT</span>
+            </h1>
+            <div class="big-button">
+                <p>
+                    NoxClient — лёгкий лаунчер с визуалами и системой аккаунтов.<br>
+                    Полностью настраиваемый, быстрый и безопасный.<br>
+                    Присоединяйся к новой эре Minecraft.
+                </p>
+            </div>
+            <div class="small-buttons">
+                <a href="#" class="small-button">Купить</a>
+                <a href="#" class="small-button">Скачать</a>
+            </div>
+        </section>
+
+        <!-- Функции -->
+        <section id="features" class="features">
+            <h2>Возможности</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Визуалы</h3>
+                    <p>Множество кастомных визуалов: кристаллы, трейлы, небо и другие эффекты прямо в игре.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Аккаунты</h3>
+                    <p>Своя система аккаунтов с регистрацией, подтверждением email и личным кабинетом.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡</div>
+                    <h3>Безопасность</h3>
+                    <p>Пароли хэшируются, доступ по JWT-токенам. Никаких утечек данных.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Поддержка</h3>
+                    <p>Быстрая помощь через Telegram-бота. Ответим на любой вопрос.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- О проекте -->
+        <section id="about" class="about">
+            <h2>О проекте</h2>
             <p>
-                NoxClient — лёгкий лаунчер с визуалами и системой аккаунтов.<br>
-                Полностью настраиваемый, быстрый и безопасный.<br>
-                Присоединяйся к новой эре Minecraft.
+                NoxClient — это не просто лаунчер, а целая экосистема для комфортной игры.
+                Мы создаём инструменты, которые делают Minecraft ярче и удобнее.
+                Наша команда постоянно работает над улучшением и добавлением новых функций.
+                Присоединяйся и почувствуй разницу.
             </p>
-        </div>
+        </section>
 
-        <div class="small-buttons">
-            <a href="#" class="small-button">Купить</a>
-            <a href="#" class="small-button">Скачать</a>
-        </div>
-    </div>
+        <!-- Контакты -->
+        <section id="contacts" class="contacts">
+            <h2>Контакты</h2>
+            <p style="color:#A78BFA; margin-bottom:30px;">Свяжитесь с нами через Telegram-бота поддержки:</p>
+            <a href="https://t.me/nox_visual_support_bot" class="telegram-btn" target="_blank">
+                💬 Поддержка в Telegram
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 NoxClient. Все права защищены. Сделано командой NoxClient.</p>
+    </footer>
 
     <script>
-        // Генерация случайных частиц
+        // Генерация частиц
         const particlesContainer = document.getElementById('particles');
-        const particleCount = 50;
+        const particleCount = 60;
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -261,4 +521,4 @@
         }
     </script>
 </body>
-        </html>
+    </html>
